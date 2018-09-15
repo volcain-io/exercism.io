@@ -1,4 +1,3 @@
-
 # Created by https://www.gitignore.io/api/go,git,elm,ruby,node,dart,python
 
 ### Dart ###
@@ -299,5 +298,7 @@ build-iPhoneSimulator/
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
 
+# misc
+/ecmascript/
 
 # End of https://www.gitignore.io/api/go,git,elm,ruby,node,dart,python
