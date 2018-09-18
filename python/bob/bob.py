@@ -2,47 +2,31 @@ import re
 
 
 def hey(phrase):
-    response = {
-        'question': "Sure.",
-        'yelling': "Whoa, chill out!",
-        'yellingQuestion': "Calm down, I know what I'm doing!",
-        'mute': "Fine. Be that way!",
-        'default': "Whatever."
-    }
-
-    # strip all whitespaces
     msg = phrase.strip()
 
-    if isYellingQuestion(msg):
-        return response['yellingQuestion']
-
-    if isYelling(msg):
-        return response['yelling']
-
-    if isQuestion(msg):
-        return response['question']
-
-    if isMute(msg):
-        return response['mute']
-
-    return response['default']
+    if is_yelling_question(msg):
+        return "Calm down, I know what I'm doing!"
+    elif is_yelling(msg):
+        return "Whoa, chill out!"
+    elif is_question(msg):
+        return "Sure."
+    elif is_mute(msg):
+        return "Fine. Be that way!"
+    else:
+        return "Whatever."
 
 
-def isYellingQuestion(phrase):
-    return isQuestion(phrase) and isYelling(phrase)
+def is_yelling_question(phrase):
+    return is_question(phrase) and is_yelling(phrase)
 
 
-def isQuestion(phrase):
-    return re.match(r'^.+\?$', phrase)
+def is_question(phrase):
+    return phrase.endswith('?')
 
 
-# matches any message which
-# starts with uppercase letters or numbers ^[A-Z0-9]
-# and does not contain lowercase letters (?![a-z])
-# and ends with uppercase letters or exclamation mark or question mark [A-Z!?]+$
-def isYelling(phrase):
-    return re.match(r'^[A-Z0-9]((?![a-z]).+)[A-Z!?]+$', phrase)
+def is_yelling(phrase):
+    return phrase.isupper()
 
 
-def isMute(phrase):
+def is_mute(phrase):
     return not phrase
