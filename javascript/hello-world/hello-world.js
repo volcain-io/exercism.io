@@ -4,7 +4,7 @@
 //
 
 class HelloWorld {
-  hello() {
+  static hello() {
     return 'Hello, World!';
   }
 }
