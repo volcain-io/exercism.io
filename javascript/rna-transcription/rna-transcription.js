@@ -1,12 +1,12 @@
 export function toRna(dnaStrand) {
-  const rnaToDna = {
-    A: 'U',
-    C: 'G',
-    G: 'C',
-    T: 'A',
-  };
-
-  if (dnaStrand.match(/[^ACGT]/g)) throw new Error('Invalid input DNA.');
-
-  return dnaStrand.replace(/[ACGT]/g, match => rnaToDna[match]);
+  return dnaStrand
+    .split('')
+    .map((nucleotide) => {
+      if (nucleotide === 'G') return 'C';
+      if (nucleotide === 'C') return 'G';
+      if (nucleotide === 'T') return 'A';
+      if (nucleotide === 'A') return 'U';
+      throw new Error('Invalid input DNA.');
+    })
+    .join('');
 }
