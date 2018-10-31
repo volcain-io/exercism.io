@@ -1,5 +1,5 @@
 export function steps(num) {
-  if (num <= 0) throw new Error("Only positive numbers are allowed");
+  if (num <= 0) throw new Error('Only positive numbers are allowed');
 
   let count = 0;
 
