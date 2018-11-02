@@ -76,5 +76,7 @@
   "licenses": [
     "MIT"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "merge": ">=1.2.1"
+  }
 }
