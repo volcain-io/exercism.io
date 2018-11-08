@@ -1,44 +1,38 @@
 export class Cipher {
-  constructor(key = this.generateKey()) {
-    if (key.length === 0 || key.match(/[^a-z]/g)) throw new Error('Bad key');
-    this.key = key;
+  constructor(key) {
+    this.min = 'a'.charCodeAt();
+    this.bound = 'z'.charCodeAt() - this.min + 1;
+    this.key = key || this.generateKey();
+    if (!/^[a-z]+$/.test(key)) throw new Error('Bad key');
   }
 
   generateKey() {
-    let key = '';
-    const min = 'a'.charCodeAt();
-    const bound = 'z'.charCodeAt() - min + 1;
-
-    while (key.length <= 100) {
-      const rand = Math.floor(Math.random() * bound) + min;
-      key += String.fromCharCode(rand);
-    }
-
-    return key;
-  }
-
-  encode(value) {
-    return this._encrypt(value);
-  }
-
-  decode(value) {
-    return this._encrypt(value, true);
-  }
-
-  _encrypt(value, reverse) {
-    const min = 'a'.charCodeAt();
-    return value.split('').map((ch, idx) => {
-      let k = this.key[idx % this.key.length].charCodeAt();
-      if (reverse) k = -k;
-      return this._getCharAt((ch.charCodeAt() + k) % min);
+    return Array(100).fill('').map((ch) => { // eslint-disable-line no-unused-vars
+      const rnd = Math.floor(Math.random() * this.bound) + this.min;
+      return String.fromCharCode(rnd);
     }).join('');
   }
 
-  _getCharAt(charCode) {
-    const min = 'a'.charCodeAt();
-    const bound = 'z'.charCodeAt() - min + 1;
-    if (charCode < 0) charCode += bound;
-    if (charCode >= bound) charCode -= bound;
-    return String.fromCharCode(charCode + min);
+  encode(value) {
+    return this.shift(value);
+  }
+
+  decode(value) {
+    return this.shift(value, true);
+  }
+
+  shift(value, reverse) {
+    return value.split('').map((ch, idx) => {
+      let k = this.key[idx % this.key.length].charCodeAt();
+      if (reverse) k = -k;
+      return this.getCharAt((ch.charCodeAt() + k) % this.min);
+    }).join('');
+  }
+
+  getCharAt(charCode) {
+    let tmp = charCode;
+    if (charCode < 0) tmp += this.bound;
+    if (charCode >= this.bound) tmp -= this.bound;
+    return String.fromCharCode(tmp + this.min);
   }
 }
