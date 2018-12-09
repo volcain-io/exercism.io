@@ -1,3 +1,3 @@
 export function isPangram(input = '') {
-  return (input.toLowerCase().match(/([a-z])(?!.*\1)/g) || []).length === 26;
+  return new Set(input.toLowerCase().replace(/[^a-z]/g, '').split('')).size === 26;
 }
