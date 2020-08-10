@@ -1,5 +1,5 @@
 export const colorCode = (name = "") => {
-  return COLORS.indexOf(name && name.trim().toLowerCase());
+  return COLORS.indexOf(name);
 };
  
 export const COLORS = [
