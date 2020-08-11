@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
+set -o xtrace
 
 main() {
   name=$1
 
-  if (( "$#" -ne 1 )); then
+  if [ $# -ne 1 ]; then
     echo "Usage: error_handling.sh <person>"
-    exit 1
+    return 1
   fi
 
   echo "Hello, ${name}"
-  exit 0
+  exit $?
 }
 
 main "$@"
