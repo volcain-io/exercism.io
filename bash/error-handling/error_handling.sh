@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 main() {
-  name=$1
+  name="$1"
 
   if (( "$#" != 1 )); then
     echo "Usage: error_handling.sh <person>"
