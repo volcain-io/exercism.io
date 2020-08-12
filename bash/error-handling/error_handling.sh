@@ -9,7 +9,6 @@ main() {
   fi
 
   echo "Hello, ${name}"
-  return "$?"
 }
 
 main "$@"
