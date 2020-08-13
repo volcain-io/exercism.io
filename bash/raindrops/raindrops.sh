@@ -7,12 +7,7 @@ main() {
   (( ${num}%5 == 0 )) && result+="Plang"
   (( ${num}%7 == 0 )) && result+="Plong"
 
-  [[ -n ${result} ]] && {
-    echo "$result"
-    return 0
-  }
-
-  echo "$num"
+  echo ${result:-${num}}
 }
 
 main "$@"
