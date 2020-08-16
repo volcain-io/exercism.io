@@ -6,24 +6,19 @@ main () {
     return 1
   }
 
-  local string1="${1}"
-  local string2="${2}"
-
-  (( ${#string1} != ${#string2} )) && {
+  if (( ${#1} != ${#2} )); then
     echo "left and right strands must be of equal length"
     return 1
-  }
+  fi
 
-  [[ "${string1}" == "${string2}" ]] && {
-    echo "0"
-    return 0
-  }
-
-  for (( i=0; i<${#string1}; i++ )); do
-    [[ "${string1:$i:1}" != "${string2:$i:1}" ]] && diff+=${string2:$i:1}
+  local diff=0
+  for (( i = 0; i < ${#1}; i++ )); do
+    if [[ "${1:$i:1}" != "${2:$i:1}" ]]; then
+      diff=$((diff + 1))
+    fi
   done
 
-  echo "${#diff}"
+  echo "${diff}"
 }
 
 main "$@"
