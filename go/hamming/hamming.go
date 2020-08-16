@@ -12,10 +12,6 @@ func Distance(a, b string) (int, error) {
 		return 0, errors.New("left and right strands must be of equal length")
 	}
 
-	if a == b {
-		return 0, nil
-	}
-
 	diffCounter := 0
 	for i := 0; i < len(a); i++ {
 		if a[i] != b[i] {
