@@ -1,5 +1,5 @@
 def convert(number):
-    result = str(number)
+    result = ""
 
     if number % 3 == 0:
         result = "Pling"
@@ -10,7 +10,7 @@ def convert(number):
     if number % 7 == 0:
         result += "Plong"
 
-    if not result.isdigit():
-        result = result.replace(str(number), "")
+    if len(result) == 0:
+        result = str(number)
 
     return result
