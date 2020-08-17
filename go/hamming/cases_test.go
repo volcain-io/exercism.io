@@ -64,4 +64,10 @@ var testCases = []struct {
 		0,
 		true,
 	},
+	{ // unicode
+		"ABCABCD",
+		"ABC€日本語",
+		4,
+		false,
+	},
 }
