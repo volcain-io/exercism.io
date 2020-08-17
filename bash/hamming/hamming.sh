@@ -11,14 +11,14 @@ main () {
     return 1
   fi
 
-  local diff=0
+  local diff_counter=0
   for (( i = 0; i < ${#1}; i++ )); do
     if [[ "${1:$i:1}" != "${2:$i:1}" ]]; then
-      diff=$((diff + 1))
+      (( diff_counter++ ))
     fi
   done
 
-  echo "${diff}"
+  echo "${diff_counter}"
 }
 
 main "$@"
