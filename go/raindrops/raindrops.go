@@ -8,7 +8,7 @@ import "strconv"
 // sounds corresponding to ceratin potential factors
 // Returns the raindrops string
 func Convert(number int) string {
-	var result string
+	result := ""
 
 	if number%3 == 0 {
 		result = "Pling"
