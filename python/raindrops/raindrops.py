@@ -14,6 +14,8 @@ The rules of raindrops are that if a given number:
       digits of the number.
 """
 
+FACTOR_SOUND_DICT = {3: "Pling", 5: "Plang", 7: "Plong"}
+
 
 def convert(number):
     """Convert number into raindrop string.
@@ -33,11 +35,10 @@ def convert(number):
           "PlingPlang".
         - 34 is not factored by 3, 5, or 7, so the result would be "34".
     """
-    mod_sound_list = {3: "Pling", 5: "Plang", 7: "Plong"}
     result = []
 
-    for mod, sound in mod_sound_list.items():
-        if number % mod == 0:
+    for factor, sound in FACTOR_SOUND_DICT.items():
+        if number % factor == 0:
             result.append(sound)
 
     return "".join(result) or str(number)
