@@ -33,15 +33,11 @@ def convert(number):
           "PlingPlang".
         - 34 is not factored by 3, 5, or 7, so the result would be "34".
     """
-    result = ''
+    mod_sound_list = {3: "Pling", 5: "Plang", 7: "Plong"}
+    result = []
 
-    if number % 3 == 0:
-        result = 'Pling'
+    for mod, sound in mod_sound_list.items():
+        if number % mod == 0:
+            result.append(sound)
 
-    if number % 5 == 0:
-        result += 'Plang'
-
-    if number % 7 == 0:
-        result += 'Plong'
-
-    return result if result else str(number)
+    return "".join(result) or str(number)
