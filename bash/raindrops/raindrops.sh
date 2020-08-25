@@ -2,10 +2,13 @@
 
 main() {
   local num="${1}"
+  local -a map=( [3]="Pling" [5]="Plang" [7]="Plong" )
 
-  (( ${num}%3 == 0 )) && result="Pling"
-  (( ${num}%5 == 0 )) && result+="Plang"
-  (( ${num}%7 == 0 )) && result+="Plong"
+  for factor in "${!map[@]}"; do
+    if (( num%factor == 0 )); then
+      result+="${map[$factor]}"
+    fi
+  done
 
   echo ${result:-${num}}
 }
