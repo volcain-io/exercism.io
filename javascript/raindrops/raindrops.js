@@ -1,16 +1,10 @@
-class Raindrops {
-  convert(number = 1) {
-    let result = '';
+export function convert(number) {
+  const factorSoundList = { 3: "Pling", 5: "Plang", 7: "Plong" };
+  let result = "";
 
-    // we are just interested in 3, 5, 7
-    if (number % 3 === 0) result += 'Pling';
-    if (number % 5 === 0) result += 'Plang';
-    if (number % 7 === 0) result += 'Plong';
-
-    if (result.length === 0) result = `${number}`;
-
-    return result;
+  for (const [factor, sound] of Object.entries(factorSoundList)) {
+    if (number % factor === 0) result += sound;
   }
-}
 
-export default Raindrops;
+  return result || number.toString();
+}
