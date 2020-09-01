@@ -22,11 +22,5 @@ export class ResistorColor {
         this.colors = colors;
     }
 
-    value = (): number =>
-        Number(
-            this.colors
-                .slice(0, 2)
-                .map((color) => bandColors[color])
-                .join("")
-        );
+    value = (): number => bandColors[this.colors[0]] * 10 + bandColors[this.colors[1]];
 }
