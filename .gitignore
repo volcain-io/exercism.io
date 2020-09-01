@@ -9,7 +9,6 @@
 build/
 # If you're building an application, you may want to check-in your pubspec.lock
 pubspec.lock
-!dart/**/lib/*.dart
 
 # Directory created by dartdoc
 # If you don't generate documentation locally you can remove this line.
@@ -141,7 +140,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
 parts/
 sdist/
@@ -241,7 +239,6 @@ dmypy.json
 # http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
 [Bb]in
 [Ii]nclude
-[Ll]ib
 [Ll]ib64
 [Ll]ocal
 [Ss]cripts
