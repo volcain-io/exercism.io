@@ -1,5 +1,16 @@
-export const decodedValue = (arg) => {
-  const colors = ["black", "brown", "red", "orange", "yellow", "green", "blue", "violet", "grey", "white"];
+export const decodedValue = (colors) => {
+  const bandColors = {
+      black: 0,
+      brown: 1,
+      red: 2,
+      orange: 3,
+      yellow: 4,
+      green: 5,
+      blue: 6,
+      violet: 7,
+      grey: 8,
+      white: 9,
+  };
 
-  return parseInt(arg.slice(0,2).map(elem => colors.indexOf(elem) ).join(''));
+  return bandColors[colors[0]] * 10 + bandColors[colors[1]];
 };
