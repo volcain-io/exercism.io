@@ -28,7 +28,7 @@ def personal_best(scores):
     Returns:
         An integer representing the highest score
     """
-    return sorted(scores)[-1]
+    return max(scores)
 
 
 def personal_top_three(scores):
