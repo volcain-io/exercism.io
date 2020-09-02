@@ -11,16 +11,17 @@ const bandColors = {
     white: 9,
 };
 type Color = keyof typeof bandColors;
+type ColorPair = [Color, Color, ...Color[]];
 
 export class ResistorColor {
-    private colors: Color[];
+    private _first: Color;
+    private _second: Color;
 
-    constructor(colors: Color[]) {
-        if (colors.length < 2) {
-            throw new Error("At least two colors need to be present");
-        }
-        this.colors = colors;
+    constructor(colors: ColorPair) {
+        [this._first, this._second] = colors;
     }
 
-    value = (): number => bandColors[this.colors[0]] * 10 + bandColors[this.colors[1]];
+    value = (): number => {
+      return bandColors[this._first] * 10 + bandColors[this._second];
+    }
 }
