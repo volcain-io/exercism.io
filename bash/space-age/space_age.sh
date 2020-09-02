@@ -25,7 +25,8 @@ main () {
   local -r planet="${1}"
   local -r seconds="${2}"
 
-  awk "BEGIN { printf \"%.2f\",${seconds}/${EARTH_YEAR_IN_SECONDS}/${PLANET_EARTH_YEARS[${planet}]};exit(0)}"
+  expr="$seconds / ( $EARTH_YEAR_IN_SECONDS * ${PLANET_EARTH_YEARS[$planet]} )"
+  printf '%.2f\n' "$(bc <<< "scale=3; ${expr}")"
 }
 
 main "$@"
