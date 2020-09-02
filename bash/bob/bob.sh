@@ -9,34 +9,22 @@ trim() {
 
 is_yelling_question() {
   # Usage: is_yelling_question "phrase"
-  if is_question "$1" && is_yelling "$1"; then
-    return 0
-  fi
-  return 1
+  is_question "$1" && is_yelling "$1"
 }
 
 is_yelling() {
   # Usage: is_yelling "phrase"
-  if [[ "$1" =~ [A-Z] && "${1^^}" == "${1}" ]]; then
-    return 0
-  fi
-  return 1
+  [[ "$1" =~ [A-Z] && "${1^^}" == "${1}" ]]
 }
 
 is_question() {
   # Usage: is_question "phrase"
-  if [[ "${1}" == *"?" ]]; then
-    return 0
-  fi
-  return 1
+  [[ "${1}" == *"?" ]]
 }
 
 is_mute() {
   # Usage: is_mute "phrase"
-  if [[ -z "$1" ]]; then
-    return 0
-  fi
-  return 1
+  [[ -z "$1" ]]
 }
 
 main () {
