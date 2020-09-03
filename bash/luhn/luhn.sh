@@ -15,11 +15,6 @@ strip_any_whitespace() {
   echo "${1//[[:space:]]/}"
 }
 
-is_odd() {
-  # Usage: is_odd <number>
-  (( "$1"%2 == 1 ))
-}
-
 evenly_divisible_by_ten() {
   # Usage: evenly_divisible_by_ten <number>
   (( "$1"%10 == 0 ))
@@ -33,7 +28,7 @@ calculate_sum() {
   # we need every second digit, so make
   # length of given number even, if necessary
   number="$1"
-  if is_odd "${#number}"; then
+  if (( "${#number}"%2 == 1 )); then
     number="0${number}"
   fi
 
