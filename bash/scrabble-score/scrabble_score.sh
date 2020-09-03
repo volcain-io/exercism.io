@@ -22,7 +22,7 @@ main () {
 
   for (( i = 0; i < "${#lowercase}"; i++ )); do
     ch=${lowercase:i:1}
-    (( count+="${score_table[$ch]}" ))
+    (( count+="${score_table[$ch]:-0}" ))
   done
 
   echo "${count}"
