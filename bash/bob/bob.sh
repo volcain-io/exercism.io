@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 
-trim() {
-  # Usage: trim "phrase"
-  : "${1#"${1%%[![:space:]]*}"}"
-  : "${_%"${_##*[![:space:]]}"}"
-  echo "$_"
+remove_all_whitespace() {
+  # Usage: remove_all_whitespace "phrase"
+  echo "${1//[[:space:]]/}"
 }
 
 is_yelling_question() {
@@ -28,15 +26,15 @@ is_mute() {
 }
 
 main () {
-  trimmed_phrase=$(trim "$1")
+  non_whitespace_phrase=$(remove_all_whitespace "$1")
 
-  if is_yelling_question "${trimmed_phrase}"; then
+  if is_yelling_question "${non_whitespace_phrase}"; then
     echo "Calm down, I know what I'm doing!"
-  elif is_yelling "${trimmed_phrase}"; then
+  elif is_yelling "${non_whitespace_phrase}"; then
     echo "Whoa, chill out!"
-  elif is_question "${trimmed_phrase}"; then
+  elif is_question "${non_whitespace_phrase}"; then
     echo "Sure."
-  elif is_mute "${trimmed_phrase}"; then
+  elif is_mute "${non_whitespace_phrase}"; then
     echo "Fine. Be that way!"
   else
     echo "Whatever."
