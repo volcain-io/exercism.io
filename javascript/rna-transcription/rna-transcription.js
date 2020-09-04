@@ -5,7 +5,7 @@ const COMPLEMENTS = {
   A: 'U',
 };
 
-export function toRna(dnaStrand) {
+export function toRna(dnaStrand = '') {
   if (dnaStrand.match(/[^GCTA]+/g) !== null) {
     throw new Error('Invalid input DNA.');
   }
