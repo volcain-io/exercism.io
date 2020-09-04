@@ -1,12 +1,16 @@
+const COMPLEMENTS = {
+  G: 'C',
+  C: 'G',
+  T: 'A',
+  A: 'U',
+};
+
 export function toRna(dnaStrand) {
+  if (dnaStrand.match(/[^GCTA]+/g) !== null) {
+    throw new Error('Invalid input DNA.');
+  }
   return dnaStrand
     .split('')
-    .map((nucleotide) => {
-      if (nucleotide === 'G') return 'C';
-      if (nucleotide === 'C') return 'G';
-      if (nucleotide === 'T') return 'A';
-      if (nucleotide === 'A') return 'U';
-      throw new Error('Invalid input DNA.');
-    })
+    .map(nucleotide => COMPLEMENTS[nucleotide])
     .join('');
 }
