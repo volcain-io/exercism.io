@@ -35,7 +35,7 @@ calculate_sum() {
   for (( idx=0; idx < "${#number}"; idx++ )); do
     digit="${number:idx:1}"
     # double every second digit
-    (( idx%2 == 0 )) && (( digit="${digit}"*2 ))
+    (( idx%2 == 0 )) && (( digit*=2 ))
     # if doubled number is greater 9, then subtract 9
     (( digit > 9 )) && (( digit-=9 ))
     # sum all digits
