@@ -14,14 +14,14 @@
 "   PlingPlang
 "
 function! Raindrops(number) abort
-  let raindrops = { 3: 'Pling', 5: 'Plang', 7: 'Plong' }
-  let result = []
+  let l:raindrops = { 3: 'Pling', 5: 'Plang', 7: 'Plong' }
+  let l:result = []
 
-  for factor in keys(raindrops)
-     if a:number % factor == 0
-        call add(result, raindrops[factor])
+  for l:factor in keys(l:raindrops)
+     if a:number % l:factor == 0
+        call add(l:result, l:raindrops[factor])
      endif
   endfor
 
-  return empty(result) ? string(a:number) : join(result, "")
+  return empty(l:result) ? string(a:number) : join(l:result, "")
 endfunction
