@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-length_less_one() {
-  # Usage: length_less_one <string>
+is_invalid_length() {
+  # Usage: is_invalid_length <string>
   [[ "${#1}" -lt 2 ]]
 }
 
@@ -54,7 +54,7 @@ main () {
   local stripped
   stripped="$(strip_any_whitespace "$1")"
 
-  if length_less_one "${stripped}" || is_non_digit "${stripped}"; then
+  if is_invalid_length "${stripped}" || is_non_digit "${stripped}"; then
     echo "false"
     return 0
   fi
