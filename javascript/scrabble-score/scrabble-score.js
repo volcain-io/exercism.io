@@ -1,4 +1,4 @@
-const points = {
+const SCORE_TABLE = {
   a: 1,
   b: 3,
   c: 3,
@@ -27,9 +27,8 @@ const points = {
   z: 10,
 };
 
-export default function score(word = '') {
-  return word.trim().toLowerCase().split('').reduce((acc, curr) => {
-    if (curr in points) return acc + points[curr];
+export function score(word = '') {
+  if ( word.length === 0 )
     return 0;
-  }, 0);
+  return score(word.slice(1)) + SCORE_TABLE[word.charAt(0).toLowerCase()];
 }
