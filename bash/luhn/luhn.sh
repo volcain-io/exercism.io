@@ -59,9 +59,9 @@ main () {
     return 0
   fi
 
-  : "$(calculate_sum "${stripped}")"
+  sum="$(calculate_sum "${stripped}")"
 
-  evenly_divisible_by_ten "$_" && echo "true" || echo "false"
+  evenly_divisible_by_ten "${sum}" && echo "true" || echo "false"
 }
 
 main "$@"
