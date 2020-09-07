@@ -20,24 +20,30 @@ evenly_divisible_by_ten() {
   (( "$1"%10 == 0 ))
 }
 
-calculate_sum() {
-  # Usage: calculate_sum <string>
-  local number
+# Formula to calculate the (doubled) value of a single digit 'x':
+#   ===> x = n * 2; if x > 9 then x = x - 9
+# We can simplify the formula even further using modulo:
+#   ===> if n < 9 then x = n * 2 % 9 else x = n
+# So if we calculate 'x' for each digit (n < 9) with the formula above,
+# we get following values for n=[0-8]:
+#   n = 0 ==> 'x' = 0
+#   n = 1 ==> 'x' = 2
+#   ...
+#   n = 8 ==> 'x' = 7
+# So we can setup a map with the corresponding values of the doubled digits
+# to retrieve our desired value. This means we do not need any math
+# calculation to get the doubled digit. We can simply use the following index:
+#   ===> ( 0: 0, 1: 2, 2: 4, 3: 6, 4: 8, 5: 1, 6: 3, 7: 5, 8: 7, 9: 9 )
+luhn() {
+  # Usage: luhn <string>
   local -i sum
+  local -a doubleIndex=( 0 2 4 6 8 1 3 5 7 9 )
 
-  # we need every second digit, so make
-  # length of given number even, if necessary
-  number="$1"
-  if (( "${#number}"%2 == 1 )); then
-    number="0${number}"
-  fi
-
-  for (( idx=0; idx < "${#number}"; idx++ )); do
-    digit="${number:idx:1}"
-    # double every second digit
-    (( idx%2 == 0 )) && (( digit*=2 ))
-    # if doubled number is greater 9, then subtract 9
-    (( digit > 9 )) && (( digit-=9 ))
+  # start reading from right to left, because we need every second digit from right
+  for (( idx=${#1}-1; idx >= 0; idx-- )); do
+    digit="${1:(-idx):1}"
+    # get the doubled value of every second digit from right
+    (( idx%2 == 0 )) && (( digit=doubleIndex[digit] ))
     # sum all digits
     (( sum+=digit ))
   done
@@ -59,7 +65,7 @@ main () {
     return 0
   fi
 
-  sum="$(calculate_sum "${stripped}")"
+  sum="$(luhn "${stripped}")"
 
   evenly_divisible_by_ten "${sum}" && echo "true" || echo "false"
 }
