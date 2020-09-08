@@ -6,40 +6,66 @@ import (
 	"unicode"
 )
 
-var scoreTable = map[rune]int{
-	'A': 1,
-	'B': 3,
-	'C': 3,
-	'D': 2,
-	'E': 1,
-	'F': 4,
-	'G': 2,
-	'H': 4,
-	'I': 1,
-	'J': 8,
-	'K': 5,
-	'L': 1,
-	'M': 3,
-	'N': 1,
-	'O': 1,
-	'P': 3,
-	'Q': 10,
-	'R': 1,
-	'S': 1,
-	'T': 1,
-	'U': 1,
-	'V': 4,
-	'W': 4,
-	'X': 8,
-	'Y': 4,
-	'Z': 10,
-}
-
 // Compute the Scrabble score of the given word
 func Score(word string) int {
-	runeWord := []rune(word)
-	if len(runeWord) == 0 {
-		return 0
+	var sum int = 0
+	for _, letter := range word {
+		switch unicode.ToUpper(letter) {
+		case 'A':
+			sum += 1
+		case 'B':
+			sum += 3
+		case 'C':
+			sum += 3
+		case 'D':
+			sum += 2
+		case 'E':
+			sum += 1
+		case 'F':
+			sum += 4
+		case 'G':
+			sum += 2
+		case 'H':
+			sum += 4
+		case 'I':
+			sum += 1
+		case 'J':
+			sum += 8
+		case 'K':
+			sum += 5
+		case 'L':
+			sum += 1
+		case 'M':
+			sum += 3
+		case 'N':
+			sum += 1
+		case 'O':
+			sum += 1
+		case 'P':
+			sum += 3
+		case 'Q':
+			sum += 10
+		case 'R':
+			sum += 1
+		case 'S':
+			sum += 1
+		case 'T':
+			sum += 1
+		case 'U':
+			sum += 1
+		case 'V':
+			sum += 4
+		case 'W':
+			sum += 4
+		case 'X':
+			sum += 8
+		case 'Y':
+			sum += 4
+		case 'Z':
+			sum += 10
+		default:
+			sum += 0
+		}
 	}
-	return Score(word[1:]) + scoreTable[unicode.ToUpper(runeWord[0])]
+	return sum
 }
