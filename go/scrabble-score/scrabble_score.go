@@ -10,7 +10,6 @@ import (
 func Score(word string) int {
 	var sum int = 0
 	for _, letter := range word {
-
 		switch unicode.ToUpper(letter) {
 		case 'A', 'E', 'I', 'L', 'N', 'O', 'R', 'S', 'T', 'U':
 			sum += 1
