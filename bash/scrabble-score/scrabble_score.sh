@@ -11,25 +11,25 @@ main () {
 
   for (( i = 0; i < "${#lowercase}"; i++ )); do
     case ${lowercase:i:1} in
-      'a'|'e'|'i'|'l'|'n'|'o'|'r'|'s'|'t'|'u')
+      [aeilnorstu])
         (( sum+=1 ))
         ;;
-      'd'|'g')
+      [dg])
         (( sum+=2 ))
         ;;
-      'b'|'c'|'m'|'p')
+      [bcmp])
         (( sum+=3 ))
         ;;
-      'f'|'h'|'v'|'w'|'y')
+      [fhvwy])
         (( sum+=4 ))
         ;;
-      'k')
+      [k])
         (( sum+=5 ))
         ;;
-      'j'|'x')
+      [jx])
         (( sum+=8 ))
         ;;
-      'q'|'z')
+      [qz])
         (( sum+=10 ))
         ;;
       *)
