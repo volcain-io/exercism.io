@@ -20,7 +20,7 @@ group_letters() {
   local output="${1:0:5}"
 
   for (( idx=5; idx<${#1}; idx+=5 )); do
-    (( idx%5 == 0 )) && output+=" ${1:idx:5}"
+    output+=" ${1:idx:5}"
   done
 
   echo "${output}"
@@ -38,9 +38,19 @@ atbash() {
   echo "${output}"
 }
 
+encode() {
+  # Usage: encode <string>
+  group_letters "$(decode "$1")"
+}
+
+decode() {
+  # Usage: decode <string>
+  atbash "$1"
+}
+
 usage() {
-    printf "Usage: atbash_cipher.sh [OPTION] [STRING]\n\n"
-    printf "OPTIONS:\n"
+    printf "Usage: %s [SUBCOMMAND] [STRING]\n\n" "${0##*/}"
+    printf "SUBCOMMAND:\n"
     printf "   encode\n"
     printf "\tEncode given string.\n"
     printf "   decode\n"
@@ -51,24 +61,15 @@ usage() {
 }
 
 main () {
-  if (( "$#" != 2 )) || [[ "$1" != "encode" && "$1" != "decode" ]]; then
-    usage
-    exit 1
-  fi
-
-  local -lr option="$1"
-  local -lr input=$(remove_none_alnum "$2")
-  local output
-
-  output="$(atbash "${input}")"
-
-  case "${option}" in
-    'encode')
-      output=$(group_letters "${output}")
+  case "$1" in
+    encode|decode)
+      "$1" "$(remove_none_alnum "${2,,}")"
+      ;;
+    *)
+      usage
+      exit 1
       ;;
   esac
-
-  echo "${output}"
 }
 
 main "$@"
