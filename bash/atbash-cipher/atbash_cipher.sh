@@ -15,11 +15,6 @@ remove_none_alnum() {
   echo "${1//[^[:alnum:]]/}"
 }
 
-decode() {
-  # Usage: atbash <string>
-  echo ""
-}
-
 group_letters() {
   # Usage: group_letters <string>
   local output="${1:0:5}"
