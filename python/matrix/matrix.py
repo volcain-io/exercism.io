@@ -12,7 +12,7 @@ class Matrix:
     return the rows and columns of that matrix.
     """
     def __init__(self, matrix_string):
-        self.matrix_array = self.to_array(matrix_string)
+        self.matrix_array = self._to_array(matrix_string)
 
     def row(self, index):
         """Get row values by its index.
@@ -40,11 +40,11 @@ class Matrix:
         return columns
 
     @classmethod
-    def to_array(cls, matrix_string):
+    def _to_array(cls, matrix_string):
         """Get multi-dimensional array
 
         Args:
-            string: string representing the matrix
+            string: string representing the matrix, e.g. "1 2 3\n4 5 6\n7 8 9"
 
         Returns:
             A multi-dimensional array representing the matrix.
