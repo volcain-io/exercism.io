@@ -6,13 +6,7 @@ public class Hamming {
 
   public Hamming(final String leftStrand, final String rightStrand) {
     this.validate(leftStrand, rightStrand);
-
-    CharacterIterator it = new StringCharacterIterator(leftStrand);
-    while (it.current() != CharacterIterator.DONE) {
-      if (it.current() != rightStrand.charAt(it.getIndex()))
-        this.hammingDistance++;
-      it.next();
-    }
+    this.calculate(leftStrand, rightStrand);
   }
 
   public int getHammingDistance() {
@@ -33,5 +27,14 @@ public class Hamming {
 
     if (null != errorMessage)
       throw new IllegalArgumentException(errorMessage);
+  }
+
+  private void calculate(final String _leftStrand, final String _rightStrand) {
+    CharacterIterator it = new StringCharacterIterator(_leftStrand);
+    while (it.current() != CharacterIterator.DONE) {
+      if (it.current() != _rightStrand.charAt(it.getIndex()))
+        this.hammingDistance++;
+      it.next();
+    }
   }
 }
