@@ -355,4 +355,18 @@ build-iPhoneSimulator/
 # misc
 /ecmascript/
 
+### PHPUnit ###
+# Covers PHPUnit
+# Reference: https://phpunit.de/
+
+# Generated files
+.phpunit.result.cache
+
+# PHPUnit
+/app/phpunit.xml
+/phpunit.xml
+
+# Build data
+/build/
+
 # End of https://www.gitignore.io/api/go,git,elm,ruby,node,dart,python
