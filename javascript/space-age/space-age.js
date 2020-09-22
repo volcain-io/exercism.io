@@ -1,4 +1,4 @@
-const PLANET_EARTH_YEARS = {
+const ORBITAL_PERIOD_IN_EARTH_YEARS = {
   earth: 1,
   jupiter: 11.862615,
   mars: 1.8808158,
@@ -8,9 +8,11 @@ const PLANET_EARTH_YEARS = {
   uranus: 84.016846,
   venus: 0.61519726,
 };
-const EARTH_YEAR_IN_SECONDS = 31557600;
+const EARTH_YEAR_IN_SECONDS = 3.15576e7;
+
+const round2digits = (number) => Math.round(number * 100) / 100;
 
 export const age = (planet, seconds) =>
-  Number(
-    (seconds / EARTH_YEAR_IN_SECONDS / PLANET_EARTH_YEARS[planet]).toFixed(2)
+  round2digits(
+    seconds / EARTH_YEAR_IN_SECONDS / ORBITAL_PERIOD_IN_EARTH_YEARS[planet]
   );
