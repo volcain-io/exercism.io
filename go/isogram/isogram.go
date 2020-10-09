@@ -2,18 +2,19 @@ package isogram
 
 import (
 	"strings"
+	"unicode"
 )
 
+// IsIsogram checks if the given strings is an isogram.
 func IsIsogram(word string) bool {
 	lowercase := strings.ToLower(word)
-
-	for _, runeValue := range word {
-		asciiValue := int(runeValue)
-		if asciiValue >= 96 && asciiValue <= 122 {
-			count := strings.Count(lowercase, string(runeValue))
-			if count > 1 {
+	letterMap := make(map[rune]bool)
+	for _, runeValue := range lowercase {
+		if unicode.IsLetter(runeValue) {
+			if letterMap[runeValue] {
 				return false
 			}
+			letterMap[runeValue] = true
 		}
 	}
 
