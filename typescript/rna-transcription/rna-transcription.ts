@@ -4,21 +4,16 @@ const complements: Readonly<Record<string, string>> = {
     T: "A",
     A: "U",
 };
-type DNANucleotide = Readonly<keyof typeof complements>;
 
 class Transcriptor {
     toRna(dnaStrand: string): string {
-        if (this.isInvalidDNA(dnaStrand)) {
-            throw new Error('Invalid input DNA.');
-        }
-
         return dnaStrand.split('')
-            .map((ch) => complements[ch as DNANucleotide])
+            .map((ch) => complements[ch] || this.raiseError())
             .join('');
     }
 
-    private isInvalidDNA(input: string = ""): boolean {
-        return input.match(/[^GCTA]+/g) !== null;
+    private raiseError(): Error {
+        throw new Error('Invalid input DNA.');
     }
 }
 
