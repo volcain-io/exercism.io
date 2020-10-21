@@ -11,7 +11,7 @@ class Robot
   const INSTRUCTION_ADVANCE = "A";
   const INSTRUCTION_TURN_RIGHT = "R";
   const INSTRUCTION_TURN_LEFT = "L";
-  const UNKNOWN_INSTRUCTION_REGEX = "/[^self::INSTRUCTION_ADVANCE + self::INSTRUCTION_TURN_RIGHT + self::INSTRUCTION_TURN_LEFT]/";
+  const UNKNOWN_STEP_REGEX = "/[^self::INSTRUCTION_ADVANCE + self::INSTRUCTION_TURN_RIGHT + self::INSTRUCTION_TURN_LEFT]/";
 
   // position of our Robot on the grid
   public array $position;
@@ -111,19 +111,19 @@ class Robot
   /**
    * Set instructions to move or turn the robot.
    *
-   * @param string $instructions Set of characters. Only 'L', 'R' or 'A' are allowed.
+   * @param string $steps Set of characters. Only 'L', 'R' or 'A' are allowed.
    *
    * @return void
    * @throws IllegalArgumentException
    */
-  function instructions(string $instructions): void
+  function instructions(string $steps): void
   {
-    if ($this->hasInvalidInstruction($instructions))
+    if ($this->hasInvalidInstruction($steps))
       throw new InvalidArgumentException("Unknown instruction set. Only 'L', 'R' or 'A' are allowed.");
 
-    $listOfInstructions = str_split($instructions);
-    foreach ($listOfInstructions as &$curr) {
-      switch ($curr) {
+    $listOfInstructions = str_split($steps);
+    foreach ($listOfInstructions as &$currStep) {
+      switch ($currStep) {
         case self::INSTRUCTION_ADVANCE:
           $this->advance();
           break;
@@ -137,7 +137,7 @@ class Robot
           // do nothing
       }
     }
-    unset($curr);
+    unset($currStep);
   }
 
   /**
@@ -147,11 +147,13 @@ class Robot
    * <br>self::INSTRUCTION_TURN_LEFT
    * <br>self::INSTRUCTION_TURN_RIGHT
    *
+   * @param string $steps instruction steps.
+   *
    * @return bool Returns `true` if expression is invalid, else `false`.
    */
-  function hasInvalidInstruction(string $instructions): bool
+  function hasInvalidInstruction(string $steps): bool
   {
-    return preg_match(self::UNKNOWN_INSTRUCTION_REGEX, $instructions);
+    return preg_match(self::UNKNOWN_STEP_REGEX, $steps);
   }
 
   /**
