@@ -89,6 +89,25 @@ class RobotSimulatorTest extends PHPUnit\Framework\TestCase
         $robot->advance();
         $this->assertEquals([0, 1], $robot->position);
         $this->assertEquals(Robot::DIRECTION_NORTH, $robot->direction);
+
+
+        // Decreases the y coordinate by one when facing south
+        $robot = new Robot([0, 0], Robot::DIRECTION_SOUTH);
+        $robot->advance();
+        $this->assertEquals([0, -1], $robot->position);
+        $this->assertEquals(Robot::DIRECTION_SOUTH, $robot->direction);
+
+        // Increases the x coordinate by one when facing east
+        $robot = new Robot([0, 0], Robot::DIRECTION_EAST);
+        $robot->advance();
+        $this->assertEquals([1, 0], $robot->position);
+        $this->assertEquals(Robot::DIRECTION_EAST, $robot->direction);
+
+        // Decreases the x coordinate by one when facing west
+        $robot = new Robot([0, 0], Robot::DIRECTION_WEST);
+        $robot->advance();
+        $this->assertEquals([-1, 0], $robot->position);
+        $this->assertEquals(Robot::DIRECTION_WEST, $robot->direction);
     }
 
     /**
