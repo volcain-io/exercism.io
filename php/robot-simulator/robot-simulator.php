@@ -11,7 +11,7 @@ class Robot
   const INSTRUCTION_ADVANCE = "A";
   const INSTRUCTION_TURN_RIGHT = "R";
   const INSTRUCTION_TURN_LEFT = "L";
-  const UNKNOWN_STEP_REGEX = "/[^self::INSTRUCTION_ADVANCE + self::INSTRUCTION_TURN_RIGHT + self::INSTRUCTION_TURN_LEFT]/";
+  const REGEX_UNKNOWN_STEP = "/[^self::INSTRUCTION_ADVANCE + self::INSTRUCTION_TURN_RIGHT + self::INSTRUCTION_TURN_LEFT]/";
 
   // position of our Robot on the grid
   public array $position;
@@ -153,7 +153,7 @@ class Robot
    */
   function hasInvalidInstruction(string $steps): bool
   {
-    return preg_match(self::UNKNOWN_STEP_REGEX, $steps);
+    return preg_match(self::REGEX_UNKNOWN_STEP, $steps);
   }
 
   /**
