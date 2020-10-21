@@ -3,43 +3,37 @@
 /**
  * Calculate the square of the sum of the first N natural numbers.
  *
- * @param int $value A natural number
+ * @param int $num A natural number
  *
  * @return int
  */
-function squareOfSum(int $value): int
+function squareOfSum(int $num): int
 {
-  $sum = $value;
-  while ($value > 0) {
-    $sum += --$value;
-  }
-  return pow($sum, 2);
+  // sum of sequence: k = (n²+n)/2
+  return pow(($num * $num + $num) / 2, 2);
 }
 
 /**
  * Calculate the sum of the squares of the first N natural numbers.
  *
- * @param int $value A natural number
+ * @param int $n A natural number
  *
  * @return int
  */
-function sumOfSquares(int $value): int
+function sumOfSquares(int $num): int
 {
-  $sum = pow($value, 2);
-  while ($value > 0) {
-    $sum += pow(--$value, 2);
-  }
-  return $sum;
+  // sum of square sequence: k² = (n(n+1)(2n+1))/6
+  return $num * ($num + 1) * (2 * $num + 1) / 6;
 }
 
 /**
  * Return the difference between the square of the sum and the sum of the squares of the first N natural numbers.
  *
- * @param int $value A natural number
+ * @param int $num A natural number
  *
  * @return int
  */
-function difference(int $value): int
+function difference(int $num): int
 {
-  return squareOfSum($value) - sumOfSquares($value);
+  return squareOfSum($num) - sumOfSquares($num);
 }
