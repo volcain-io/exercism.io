@@ -12,12 +12,12 @@ define('FACTOR_SOUND_DICT', [3 => "Pling", 5 => "Plang", 7 => "Plong"]);
  */
 function raindrops(int $number): string
 {
-  $result = "";
+  $result = '';
   foreach (FACTOR_SOUND_DICT as $factor => $sound) {
     if ($number % $factor === 0) {
       $result .= $sound;
     }
   }
 
-  return $result === "" ? $number : $result;
+  return $result ? $result : strval($number);
 }
