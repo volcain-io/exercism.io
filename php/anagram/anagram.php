@@ -11,20 +11,17 @@ function detectAnagrams(string $word, array $listOfWords): array
 {
   $output = [];
 
-  $lower = mb_strtolower($word);
-  $characterList = mb_str_split($lower);
+  $characterList = mb_str_split(mb_strtolower($word));
   sort($characterList);
   $alphaSort = implode($characterList);
 
   foreach ($listOfWords as $value) {
-    $anagramLower = mb_strtolower($value);
-
     // skip equal words
-    if ($lower === $anagramLower) {
+    if (strcasecmp($word, $value) == 0) {
       continue;
     }
 
-    $anagramCharacterList = mb_str_split($anagramLower);
+    $anagramCharacterList = mb_str_split(mb_strtolower($value));
     sort($anagramCharacterList);
     $anagramAlphaSort = implode($anagramCharacterList);
 
