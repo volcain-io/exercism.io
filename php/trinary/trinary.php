@@ -11,13 +11,12 @@ define('TRINARY_BASE', 3);
  */
 function toDecimal(string $trinaryNum): int
 {
-  $sum = 0;
-
   // stop calculating for any non-trinary number
   if (preg_match('/[^012]/', $trinaryNum)) {
-    return $sum;
+    return 0;
   }
 
+  $sum = 0;
   $exponent = strlen($trinaryNum) - 1;
   $numList = str_split($trinaryNum);
   foreach ($numList as $digit) {
