@@ -1,4 +1,4 @@
-const mapOfRomanLiterals = new Map([
+const mapOfRomanNumerals = new Map([
   [1000, "M"],
   [900, "CM"],
   [500, "D"],
@@ -17,7 +17,7 @@ const mapOfRomanLiterals = new Map([
 function toRoman(num) {
   let result = "";
 
-  for (const [key, value] of mapOfRomanLiterals) {
+  for (const [key, value] of mapOfRomanNumerals) {
     while (key <= num) {
       num -= key;
       result += value;
