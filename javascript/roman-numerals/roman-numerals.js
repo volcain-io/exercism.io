@@ -14,7 +14,7 @@ const mapOfRomanNumerals = new Map([
   [1, "I"],
 ]);
 
-function toRoman(num) {
+export function toRoman(num) {
   let result = "";
 
   for (const [key, value] of mapOfRomanNumerals) {
@@ -26,5 +26,3 @@ function toRoman(num) {
 
   return result;
 }
-
-export default toRoman;
