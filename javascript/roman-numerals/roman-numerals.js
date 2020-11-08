@@ -1,25 +1,26 @@
+const mapOfRomanLiterals = new Map([
+  [1000, "M"],
+  [900, "CM"],
+  [500, "D"],
+  [400, "CD"],
+  [100, "C"],
+  [90, "XC"],
+  [50, "L"],
+  [40, "XL"],
+  [10, "X"],
+  [9, "IX"],
+  [5, "V"],
+  [4, "IV"],
+  [1, "I"],
+]);
+
 function toRoman(num) {
-  const map = new Map();
-  map.set(1000, 'M');
-  map.set(900, 'CM');
-  map.set(500, 'D');
-  map.set(400, 'CD');
-  map.set(100, 'C');
-  map.set(90, 'XC');
-  map.set(50, 'L');
-  map.set(40, 'XL');
-  map.set(10, 'X');
-  map.set(9, 'IX');
-  map.set(5, 'V');
-  map.set(4, 'IV');
-  map.set(1, 'I');
+  let result = "";
 
-  let result = '';
-
-  for (const [key, value] of map) {
+  for (const [key, value] of mapOfRomanLiterals) {
     while (key <= num) {
-      result += value;
       num -= key;
+      result += value;
     }
   }
 
