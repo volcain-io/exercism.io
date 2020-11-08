@@ -224,13 +224,13 @@ class GameTest extends PHPUnit\Framework\TestCase
         $this->game->score();
     }
 
-    // public function testAGameWithMoreThanTenFramesCanNotBeScored() : void
-    // {
-    //     $this->expectException(Exception::class);
-    //     $this->rollMany(21, 0);
+    public function testAGameWithMoreThanTenFramesCanNotBeScored() : void
+    {
+        $this->expectException(Exception::class);
+        $this->rollMany(21, 0);
 
-    //     $this->game->score();
-    // }
+        $this->game->score();
+    }
 
     public function testBonusRollsForAStrikeInTheLastFrameMustBeRolledBeforeScoreCanBeCalculated() : void
     {

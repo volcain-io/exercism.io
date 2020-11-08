@@ -13,6 +13,9 @@ class Frame
   private bool $isSetFirstRoll;
   private bool $isSetSecondRoll;
 
+  /**
+   * Constructor.
+   */
   function __construct()
   {
     $this->firstRoll = 0;
@@ -22,16 +25,33 @@ class Frame
     $this->isSetSecondRoll = false;
   }
 
+  /**
+   * Get number of pins knocked down on first roll
+   *
+   * @return int
+   */
   public function getPinsOfFirstRoll(): int
   {
     return $this->firstRoll;
   }
 
+  /**
+   * Get number pins knocked down on second roll
+   *
+   * @return int
+   */
   public function getPinsOfSecondRoll(): int
   {
     return $this->secondRoll;
   }
 
+  /**
+   * Get number of pins knocked down in total (first + second roll)
+   *
+   * @throws Exception If total number is greater than 10
+   *
+   * @return int
+   */
   public function getScore(): int
   {
     $score = $this->getPinsOfFirstRoll() + $this->getPinsOfSecondRoll();
@@ -40,16 +60,33 @@ class Frame
     return $score;
   }
 
+  /**
+   * Get bonus points if there is any.
+   *
+   * @return int
+   */
   public function getBonus(): int
   {
     return $this->bonus;
   }
 
+  /**
+   * Get total score of frame (first + second roll + bonus points).
+   *
+   * @return int
+   */
   public function getTotalScore(): int
   {
     return $this->getScore() + $this->getBonus();
   }
 
+  /**
+   * Set number of pins knocked down on first roll, if it is not already set.
+   *
+   * @param int $pins Number of pins knocked down
+   *
+   * @return void
+   */
   public function setPinsOfFirstRoll(int $pins): void
   {
     if (!$this->isSetFirstRoll) {
@@ -58,6 +95,13 @@ class Frame
     }
   }
 
+  /**
+   * Set number of pins knocked down on second roll, if it is not already set.
+   *
+   * @param int $pins Number of pins knocked down
+   *
+   * @return void
+   */
   public function setPinsOfSecondRoll(int $pins): void
   {
     if (!$this->isSetSecondRoll) {
@@ -66,6 +110,13 @@ class Frame
     }
   }
 
+  /**
+   * Set bonus points, if there is any.
+   *
+   * @param int $bonus Number of bonus points.
+   *
+   * @return void
+   */
   public function setBonus(int $bonus): void
   {
     $this->bonus = $bonus;
@@ -107,25 +158,44 @@ class Game
   }
 
   /**
-   * Create an array of Frame objects.
+   * Called at the very end of the game and returns the total score for the game.
    *
    * @throws \Exception
    *
+   * @return int
+   */
+  public function score(): int
+  {
+    $this->createFramesAndCalculateScore();
+
+    // check last frame for special cases and throw an exception if an error occurs
+    $this->checkLastFrame();
+
+    return $this->score;
+  }
+
+  /**
+   * Create an array of Frame objects and calculate the total score of the game.
+   *
+   * @throws \Exception If a game is incomplete or unstarted.
+   *
    * @return void
    */
-  private function createFrames()
+  private function createFramesAndCalculateScore(): void
   {
     unset($this->listOfFrames);
     $this->score = 0;
 
     $throwIdx = 0;
     for ($numFrames = 0; $numFrames < 10; $numFrames++) {
+      // check if game is incomplete or unstarted
       if (array_key_exists($throwIdx, $this->listOfThrows) && array_key_exists($throwIdx + 1, $this->listOfThrows)) {
         $throw = $this->listOfThrows[$throwIdx];
 
         $isStrike = $throw === Frame::MAX_PINS;
         $isSpare = $throw + $this->listOfThrows[$throwIdx + 1] === Frame::MAX_PINS;
         if ($isStrike) {
+          // check that bonus roll must be rolled before score can be calculated
           if (!array_key_exists($throwIdx + 2, $this->listOfThrows)) {
             throw new Exception('Invalid range');
           }
@@ -139,6 +209,7 @@ class Game
           $this->listOfFrames[] = $frame;
           $throwIdx++;
         } elseif ($isSpare) {
+          // check that bonus roll must be rolled before score can be calculated
           if (!array_key_exists($throwIdx + 2, $this->listOfThrows)) {
             throw new Exception('Invalid range');
           }
@@ -168,32 +239,28 @@ class Game
   }
 
   /**
-   * Called at the very end of the game and returns the total score for the game.
+   * Two special cases in last frame to be checked.
+   * - Two bonus rolls after a strike in the last frame cannot score more than 10 points.
+   * - A game with more than ten frames cannot be scored.
    *
-   * @throws \Exception
+   * @throws Exception
    *
-   * @return int
+   * @return void
    */
-  public function score(): int
-  {
-    // create a list frames with all the points the user makes
-    $this->createFrames();
-
-    $this->checkLastFrame();
-
-    return $this->score;
-  }
-
-  /**
-   * Special case in last frame. Two bonus rolls after a strike in the last frame cannot score more than 10 points.
-   */
-  private function checkLastFrame()
+  private function checkLastFrame(): void
   {
     $frame = array_reverse($this->listOfFrames)[0];
+
+    // two bonus rolls after a strike in the last frame cannot score more than 10 points.
     $firstRoll = $frame->getPinsOfFirstRoll();
     $bonus = $frame->getBonus();
-
-    if ($firstRoll === 10 && $bonus > 10 && $bonus !== 20)
+    if ($firstRoll === Frame::MAX_PINS && $bonus > Frame::MAX_PINS && $bonus !== (Frame::MAX_PINS * 2))
       throw new Exception('Too many pins');
+
+    // a game with more than ten frames cannot be scored.
+    $score = $frame->getScore();
+    if ($score < Frame::MAX_PINS && count($this->listOfThrows) > 20 ) {
+      throw new Exception('Too many frames');
+    }
   }
 }
