@@ -44,22 +44,21 @@ function calculate(string $wordProblem = ""): float
  */
 function parseProblem(string $wordProblem = ""): array
 {
-  // remove question mark
-  $clean = substr($wordProblem, 0, -1);
-  // filter all words & suffixes which we do not need to evaluate the math expression
-  $filter_words = ["What", "is", "by", "to", "the", "power"];
-  $filter_suffixes = ["st", "nd", "rd", "th"];
-  $tmp = explode(" ", $clean);
-  foreach ($tmp as $key => $value) {
-    if (in_array($value, $filter_words)) unset($tmp[$key]);
-    $lastTwoCh = substr($value, strlen($value) - 2);
-    if (in_array($lastTwoCh, $filter_suffixes)) {
-      $num = substr($value, 0, -2);
-      $tmp[$key] = $num;
-    }
-  }
-  // reset the keys
-  return array_values($tmp);
+  $translations = array(
+    'What is ' => '',
+    'by ' => '',
+    'to ' => '',
+    'the ' => '',
+    'power?' => '',
+    '?' => '',
+    'st ' => '',
+    'nd ' => '',
+    'rd ' => '',
+    'th ' => '',
+  );
+
+  $strippedVersion = strtr(trim($wordProblem), $translations);
+  return explode(" ", $strippedVersion);
 }
 
 /**
