@@ -7,7 +7,7 @@
  *
  * @return bool
  */
-function isIsogram(string $word): bool
+function isIsogram(string $word = ""): bool
 {
   $lower = mb_strtolower($word);
   $letterMap = [];
