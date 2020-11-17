@@ -23,18 +23,9 @@ function square(int $num): string
 /**
  * Calculate the total number of grains.
  *
- * @throws InvalidArgumentException If exponent is not between 1 and 64.
- *
  * @return string The result as a string.
  */
 function total(): string
 {
-  $total = 0;
-
-  for ($exponent = FIRST_SQUARE; $exponent <= LAST_SQUARE; $exponent++) {
-    $power = square($exponent);
-    $total = bcadd($total, $power);
-  }
-
-  return $total;
+  return bcsub(PHP_INT_MAX, PHP_INT_MIN);
 }
