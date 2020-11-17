@@ -9,14 +9,14 @@
  */
 function isArmstrongNumber(int $num = 0): bool
 {
-  if ( $num < 0 )
-    throw new RangeException("Input must be positive.");
+  if ($num < 0 || !is_int($num))
+    throw new RangeException("Input must be a positive integer.");
 
   $sum = 0;
-  $splitted = str_split($num);
-  $len = count($num);
-  foreach ($splitted as $value) {
-    $sum += $value ** $len;
+  $s_num = (string) $num;
+  $len = strlen($s_num);
+  for ($idx = 0; $idx < $len; $idx++) {
+    $sum += $s_num[$idx] ** $len;
   }
 
   return $sum === $num;
