@@ -33,19 +33,17 @@ class School
    */
   public function grade(int $grade): array
   {
-    if (array_key_exists($grade, $this->roster))
-      return $this->roster[$grade];
-    return [];
+    return isset($this->roster[$grade]) ? $this->roster[$grade] : [];
   }
 
   /**
-   * List of sorted roster by grade and students name.
+   * List sorted roster by grade and students name.
    *
    * @return array A sorted list.
    */
   public function studentsByGradeAlphabetical(): array
   {
-    return $this->sortByGradeAndStudentsName();
+    return $this->getSortedListByGradeAndStudentsName();
   }
 
   /**
@@ -53,11 +51,11 @@ class School
    *
    * @return array A sorted list.
    */
-  private function sortByGradeAndStudentsName(): array
+  private function getSortedListByGradeAndStudentsName(): array
   {
     $tmp = $this->roster;
-    foreach (array_keys($tmp) as $grade) {
-      sort($tmp[$grade]);
+    foreach ($tmp as &$listOfStudents) {
+      sort($listOfStudents);
     }
     ksort($tmp);
 
