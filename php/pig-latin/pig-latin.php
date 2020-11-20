@@ -27,7 +27,7 @@ function translate(string $words = ""): string
  */
 function beginsWithVowelSounds(string $word = ""): bool
 {
-  return preg_match('/^([aeiou]|(x|y)[^aeiou])/', $word);
+  return preg_match('/^([aeiou]|(x|y)[^aeiou])/i', $word);
 }
 
 /**
