@@ -1,23 +1,12 @@
 <?php
 
-define("OPENING_BRACKET", "[");
-define("CLOSING_BRACKET", "]");
-define("OPENING_BRACE", "{");
-define("CLOSING_BRACE", "}");
-define("CLOSING_PARENTHESE", ")");
-define("OPENING_PARENTHESE", "(");
-
-define("BRACKETS", OPENING_BRACKET . CLOSING_BRACKET);
-define("BRACES", OPENING_BRACE . CLOSING_BRACE);
-define("PARENTHESES", OPENING_PARENTHESE . CLOSING_PARENTHESE);
+define("BRACKETS", "[]");
+define("BRACES", "{}");
+define("PARENTHESES", "()");
 
 define(
   "REGEX_PATTERN_NON_BRACKETS",
-  '/[^' .
-    '\\' . OPENING_BRACKET . '\\' . CLOSING_BRACKET .
-    '\\' . OPENING_BRACE . '\\' . CLOSING_BRACE .
-    '\\' . OPENING_PARENTHESE . '\\' . CLOSING_PARENTHESE .
-    ']/'
+  '/[^' . preg_quote(BRACKETS) . preg_quote(BRACES) . preg_quote(PARENTHESES) . ']/'
 );
 
 /**
@@ -30,23 +19,7 @@ define(
  */
 function brackets_match(string $string = ""): bool
 {
-  return hasEqualPairs($string) && verifyPairs($string);
-}
-
-/**
- * Check if brackets, braces or parentheses have pairs.
- *
- * @param string $string The string to check.
- *
- * @return bool `true` on success, `false` on failure.
- */
-function hasEqualPairs(string $string = ""): bool
-{
-  $equalBrackets = substr_count($string, OPENING_BRACKET) === substr_count($string, CLOSING_BRACKET);
-  $equalBraces = substr_count($string, OPENING_BRACE) === substr_count($string, CLOSING_BRACE);
-  $equalParentheses = substr_count($string, OPENING_PARENTHESE) === substr_count($string, CLOSING_PARENTHESE);
-
-  return $equalBrackets && $equalBraces && $equalParentheses;
+  return verifyPairs($string);
 }
 
 /**
