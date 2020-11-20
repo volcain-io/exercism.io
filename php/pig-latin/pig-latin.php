@@ -57,7 +57,7 @@ function applyRule2(string $word = ""): string
   $idx = 1;
   // The letters "ch", "qu", "th", "xr", "yt" belong together
   if (preg_match('/^(ch|qu|th|xr|yt)/i', $word)) $idx = 2;
-  // The letters "sch", "[^a-z]qu" belong together
+  // The letters "sch", "thr", "[^a-z]qu" belong together
   if (preg_match('/^(sch|thr|[^aeiou]qu)/i', $word)) $idx = 3;
 
   $prefix = mb_substr($word, 0, $idx);
