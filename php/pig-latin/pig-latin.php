@@ -40,7 +40,7 @@ function beginsWithVowelSounds(string $word = ""): bool
  */
 function applyRule1(string $word = ""): string
 {
-  return $word . "ay";
+  return addAy($word);
 }
 
 /**
@@ -63,5 +63,16 @@ function applyRule2(string $word = ""): string
   $prefix = mb_substr($word, 0, $idx);
   $restOfWord = mb_substr($word, $idx);
 
-  return $restOfWord . $prefix . "ay";
+  return addAy($restOfWord . $prefix);
+}
+
+/**
+ * Add 'ay' to the end of the word.
+ *
+ * @param string $word The word to update.
+ *
+ * @return string The result as a string.
+ */
+function addAy(string $word = ""): string {
+  return $word . "ay";
 }
