@@ -19,18 +19,6 @@ define(
  */
 function brackets_match(string $string = ""): bool
 {
-  return verifyPairs($string);
-}
-
-/**
- * Verify that brackets, braces or parentheses are nested correctly.
- *
- * @param string $string The string to verify.
- *
- * @return bool `true` on success, `false` on failure.
- */
-function verifyPairs(string $string = ""): bool
-{
   $listOfBracketPairs = preg_replace(REGEX_PATTERN_NON_BRACKETS, '', $string);
   $len = strlen($listOfBracketPairs) / 2;
   for ($idx = 0; $idx < $len; $idx++) {
