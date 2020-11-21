@@ -16,11 +16,9 @@ function parse_binary(string $binary = ""): string
   }
 
   $decimal = "0";
-  $rev = strrev($binary);
-  $idx = strlen($rev) - 1;
-  while (0 <= $idx) {
-    $decimal = bcadd($decimal, bcmul($rev[$idx], bcpow(2, $idx)));
-    $idx--;
+  $rev = str_split(strrev($binary));
+  foreach($rev as $idx => $bit) {
+    $decimal = bcadd($decimal, bcmul($bit, bcpow(2, $idx)));
   }
 
   return $decimal;
