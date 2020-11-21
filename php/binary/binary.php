@@ -5,23 +5,24 @@
  *
  * @param string $binary The string to convert.
  *
- * @return int The result as int.
+ * @return string The decimal value of $binary.
  *
  * @throws InvalidArgumentException If given string is not a valid binary string.
  */
-function parse_binary(string $binary = ""): int
+function parse_binary(string $binary = ""): string
 {
   if (!isValidBinary($binary)) {
     throw new InvalidArgumentException("Invalid input. Only 0's and 1's allowed.");
   }
 
-  $decimal = 0;
+  $decimal = "0";
   $rev = strrev($binary);
   $idx = strlen($rev) - 1;
   while (0 <= $idx) {
-    $decimal += $rev[$idx] * (2 ** $idx);
+    $decimal = bcadd($decimal, bcmul($rev[$idx], bcpow(2, $idx)));
     $idx--;
   }
+
   return $decimal;
 }
 
