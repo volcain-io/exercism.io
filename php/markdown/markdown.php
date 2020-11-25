@@ -5,18 +5,18 @@ function parseMarkdown($markdown)
   $lines = explode("\n", $markdown);
 
   foreach ($lines as &$line) {
-    createHeaders($line);
-    createUnorderedListItem($line);
+    createHeader($line);
+    createListItem($line);
     createParagraph($line);
-    createBold($line);
-    createItalic($line);
+    createBoldText($line);
+    createItalicText($line);
   }
   createUnorderedList($lines);
 
   return join($lines);
 }
 
-function createHeaders(string &$line = '')
+function createHeader(string &$line = '')
 {
   if (preg_match("/^######(.*)/", $line, $matches)) {
     $line = "<h6>" . trim($matches[1]) . "</h6>";
@@ -27,7 +27,7 @@ function createHeaders(string &$line = '')
   }
 }
 
-function createBold(string &$line): bool
+function createBoldText(string &$line): bool
 {
   if (preg_match('/(.*)__(.*)__(.*)/', $line, $matches)) {
     $line = $matches[1] . '<em>' . $matches[2] . '</em>' . $matches[3];
@@ -36,7 +36,7 @@ function createBold(string &$line): bool
   return false;
 }
 
-function createItalic(string &$line): bool
+function createItalicText(string &$line): bool
 {
   if (preg_match('/(.*)_(.*)_(.*)/', $line, $matches)) {
     $line = $matches[1] . '<i>' . $matches[2] . '</i>' . $matches[3];
@@ -54,11 +54,11 @@ function createParagraph(string &$line): bool
   return false;
 }
 
-function createUnorderedListItem(string &$line): bool
+function createListItem(string &$line): bool
 {
   if (preg_match('/\*(.*)/', $line, $matches)) {
-    $isBold = createBold($matches[1]);
-    $isItalic = createItalic($matches[1]);
+    $isBold = createBoldText($matches[1]);
+    $isItalic = createItalicText($matches[1]);
 
     if ($isItalic || $isBold) {
       $line = "<li>" . trim($matches[1]) . "</li>";
