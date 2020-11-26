@@ -1,6 +1,13 @@
 <?php
 
-function parseMarkdown($markdown)
+/**
+ * Markdown to HTML Parser.
+ *
+ * @param string $markdown The markdown to parse.
+ *
+ * @return string The parsed markdown as HTML.
+ */
+function parseMarkdown(string $markdown = ''): string
 {
   $lines = explode("\n", $markdown);
 
@@ -8,68 +15,95 @@ function parseMarkdown($markdown)
     createHeader($line);
     createListItem($line);
     createParagraph($line);
-    createBoldText($line);
-    createItalicText($line);
+    createBoldAndItalicText($line);
   }
   createUnorderedList($lines);
 
   return join($lines);
 }
 
-function createHeader(string &$line = '')
+/**
+ * Create H1, H2 or H6 titles.
+ *
+ * @param string &$line The string to replace.
+ *
+ * @return void
+ */
+function createHeader(string &$line = ''): void
 {
-  if (preg_match("/^######(.*)/", $line, $matches)) {
-    $line = "<h6>" . trim($matches[1]) . "</h6>";
-  } elseif (preg_match("/^##(.*)/", $line, $matches)) {
-    $line = "<h2>" . trim($matches[1]) . "</h2>";
-  } elseif (preg_match("/^#(.*)/", $line, $matches)) {
-    $line = "<h1>" . trim($matches[1]) . "</h1>";
-  }
+  $line = preg_replace('/^###### (.*)/u', '<h6>${1}</h6>', $line);
+  $line = preg_replace('/^## (.*)/u', '<h2>${1}</h2>', $line);
+  $line = preg_replace('/^# (.*)/u', '<h1>${1}</h1>', $line);
 }
 
-function createBoldText(string &$line): bool
+/**
+ * Create <em></em> and <i></i> text.
+ *
+ * @param string &$line The string to replace.
+ *
+ * @return bool `true` on success, `false` on failure.
+ */
+function createBoldAndItalicText(string &$line): bool
 {
-  if (preg_match('/(.*)__(.*)__(.*)/', $line, $matches)) {
-    $line = $matches[1] . '<em>' . $matches[2] . '</em>' . $matches[3];
-    return true;
+  $bool = false;
+  if (isBoldText($line)) {
+    $line = preg_replace('/__(.*)__/u', '<em>${1}</em>', $line);
+    $bool = true;
   }
-  return false;
+  if (isItalicText($line)) {
+    $line = preg_replace('/_(.*)_/u', '<i>${1}</i>', $line);
+    $bool = true;
+  }
+  return $bool;
 }
 
-function createItalicText(string &$line): bool
-{
-  if (preg_match('/(.*)_(.*)_(.*)/', $line, $matches)) {
-    $line = $matches[1] . '<i>' . $matches[2] . '</i>' . $matches[3];
-    return true;
-  }
-  return false;
-}
-
+/**
+ * Create <em></em> and/or <i></i> text.
+ *
+ * @param string &$line The string to replace.
+ *
+ * @return bool `true` on success, `false` on failure.
+ */
 function createParagraph(string &$line): bool
 {
-  if (!preg_match('/<h|<ul|<p|<li/', $line)) {
-    $line = "<p>$line</p>";
-    return true;
+  if (preg_match('/^(?:(?!<h[1-6]>|<ul>|<li>|\#|\*).)*/u', $line, $matches)) {
+    if (!(empty($matches[0]))) {
+      $line = '<p>' . $line . '</p>';
+      return true;
+    }
   }
   return false;
 }
 
+/**
+ * Create <li></li> item.
+ *
+ * @param string &$line The string to replace.
+ *
+ * @return bool `true` on success, `false` on failure.
+ */
 function createListItem(string &$line): bool
 {
   if (preg_match('/\*(.*)/', $line, $matches)) {
-    $isBold = createBoldText($matches[1]);
-    $isItalic = createItalicText($matches[1]);
+    createBoldAndItalicText($matches[1]);
 
-    if ($isItalic || $isBold) {
-      $line = "<li>" . trim($matches[1]) . "</li>";
-    } else {
-      $line = "<li><p>" . trim($matches[1]) . "</p></li>";
-    }
+    $line = trim($matches[1]);
+    if (!(isBoldText($line) || isItalicText(($line))))
+      createParagraph($line);
+    $line = '<li>' . $line . '</li>';
+
     return true;
   }
   return false;
 }
 
+/**
+ * Create <ul></ul> list.
+ *
+ * @param string &$lines The string to replace.
+ *
+ * @return bool `true` on success, `false` on failure.
+ */
 function createUnorderedList(array &$lines): bool
 {
   $unorderedList = array_filter($lines, function ($val) {
@@ -85,4 +119,28 @@ function createUnorderedList(array &$lines): bool
     return true;
   }
   return false;
+}
+
+/**
+ * Check if given text is a bold text.
+ *
+ * @param string $line The string to check.
+ *
+ * @return bool `true` on success, `false` on failure.
+ */
+function isBoldText(string $line): bool
+{
+  return preg_match('/(__(.*)__|<em>(.*)<\/em>)/', $line);
+}
+
+/**
+ * Check if given text is an italic text.
+ *
+ * @param string $line The string to check.
+ *
+ * @return bool `true` on success, `false` on failure.
+ */
+function isItalicText(string $line): bool
+{
+  return preg_match('/(_(.*)_|<i>(.*)<\/i>)/', $line);
 }
