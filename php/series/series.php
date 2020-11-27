@@ -3,14 +3,14 @@
 /**
  * Given a string of digits, output all the contiguous substrings of length n in that string.
  *
- * @param string $digits The string of digits.
- * @param int $len The length of substring.
+ * @param string $digits The string of digits. (Default = '')
+ * @param int $len The length of substring. (Default = 0)
  *
  * @return array
  *
  * throws RangeException If given string does contain other characters than digits or the given length is invalid.
  */
-function slices(string $digits, int $len): array
+function slices(string $digits = '', int $len = 0): array
 {
   try {
     $output = [];
