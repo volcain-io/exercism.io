@@ -21,10 +21,9 @@ function slices(string $digits, int $len): array
     validateLength($len, $max);
 
     $idx = 0;
-    while ($idx < $max) {
-      $sub = substr($digits, $idx, $len);
-      if (isset($sub[$len - 1]))
-        $output[] = $sub;
+    $lastIdx = $max - $len + 1;
+    while ($idx < $lastIdx) {
+      $output[] = substr($digits, $idx, $len);
       $idx++;
     }
 
