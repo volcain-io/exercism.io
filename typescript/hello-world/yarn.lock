@@ -2,9 +2,10 @@
 # yarn lockfile v1
 
 
-"@types/jest@^21.1.5":
+"@types/jest@21.1.5":
   version "21.1.5"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-21.1.5.tgz#3db93d069d12602ca115d3604550e15131d8eb7a"
+  integrity sha512-HwBIPK96DROvcB4EX5mA7L2nzhZ3sh8AcDSFODB4eG43S3q3d0+oo356J51qCxw9Bbn7G1DOmBmrw6vf+WiGTg==
 
 "@types/node@8.0.47":
   version "8.0.47"
