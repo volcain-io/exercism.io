@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@types/jest": "21.1.10",
-    "@types/node": "8.10.66",
+    "@types/node": "16.11.21",
     "jest": "21.2.1",
     "ts-jest": "21.2.4",
     "tslint": "5.20.1",
