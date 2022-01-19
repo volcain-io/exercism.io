@@ -20,7 +20,7 @@
     "jest": "21.2.1",
     "ts-jest": "21.2.4",
     "tslint": "5.20.1",
-    "typescript": "2.5.3"
+    "typescript": "2.9.2"
   },
   "jest": {
     "transform": {
