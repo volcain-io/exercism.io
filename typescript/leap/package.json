@@ -15,10 +15,10 @@
     "lintci": "tslint \"*.ts?(x)\" --force"
   },
   "dependencies": {
-    "@types/jest": "21.1.10",
+    "@types/jest": "27.4.0",
     "@types/node": "16.11.21",
-    "jest": "21.2.1",
-    "ts-jest": "21.2.4",
+    "jest": "27.4.7",
+    "ts-jest": "27.1.3",
     "tslint": "5.20.1",
     "typescript": "4.5.4"
   },
