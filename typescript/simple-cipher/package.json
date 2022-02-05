@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@types/jest": "27.4.0",
-    "@types/node": "16.11.21",
+    "@types/node": "16.11.22",
     "jest": "27.4.7",
     "kind-of": "6.0.3",
     "mem": "9.0.2",
