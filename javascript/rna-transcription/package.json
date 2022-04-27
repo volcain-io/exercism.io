@@ -15,10 +15,10 @@
     "@types/jest": "27.4.1",
     "@types/node": "16.11.31",
     "babel-eslint": "10.1.0",
-    "babel-jest": "28.0.1",
+    "babel-jest": "28.0.2",
     "eslint": "8.14.0",
     "eslint-plugin-import": "2.26.0",
-    "jest": "28.0.1"
+    "jest": "28.0.2"
   },
   "jest": {
     "modulePathIgnorePatterns": [
