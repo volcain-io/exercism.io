@@ -9,7 +9,7 @@
     "url": "https://github.com/exercism/javascript"
   },
   "devDependencies": {
-    "babel-jest": "28.0.2",
+    "babel-jest": "28.0.3",
     "babel-plugin-transform-builtin-extend": "1.1.2",
     "babel-preset-env": "1.7.0",
     "eslint": "8.14.0",
@@ -17,7 +17,7 @@
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-jsx-a11y": "6.5.1",
     "eslint-plugin-react": "7.29.4",
-    "jest": "28.0.2"
+    "jest": "28.0.3"
   },
   "jest": {
     "modulePathIgnorePatterns": [
