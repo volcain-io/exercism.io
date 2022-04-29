@@ -9,10 +9,10 @@
     "url": "https://github.com/exercism/javascript"
   },
   "devDependencies": {
-    "@babel/cli": "7.17.6",
-    "@babel/core": "7.17.9",
+    "@babel/cli": "7.17.10",
+    "@babel/core": "7.17.10",
     "@babel/plugin-syntax-bigint": "7.8.3",
-    "@babel/preset-env": "7.16.11",
+    "@babel/preset-env": "7.17.10",
     "@types/jest": "27.4.1",
     "@types/node": "16.11.32",
     "babel-eslint": "10.1.0",
