@@ -19,7 +19,7 @@ main () {
     exit 1
   fi
 
-  echo $output
+  echo ${output#0}
   exit 0
 }
 
