@@ -21,6 +21,6 @@ main () {
 
   echo $count
   exit 0
-}
+} 
 
 main "$@"
