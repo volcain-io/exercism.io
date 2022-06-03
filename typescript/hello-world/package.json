@@ -15,7 +15,7 @@
     "lintci": "tslint \"*.ts?(x)\" --force"
   },
   "dependencies": {
-    "@types/jest": "27.5.2",
+    "@types/jest": "28.1.0",
     "@types/node": "16.11.38",
     "jest": "28.1.0",
     "ts-jest": "28.0.3",
