@@ -9,7 +9,7 @@
     "url": "https://github.com/exercism/typescript"
   },
   "devDependencies": {
-    "@types/jest": "28.1.1",
+    "@types/jest": "28.1.2",
     "@types/node": "16.11.39",
     "@typescript-eslint/eslint-plugin": "5.28.0",
     "@typescript-eslint/parser": "5.28.0",
