@@ -9,7 +9,7 @@
     "url": "https://github.com/exercism/javascript"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "7.11.0",
+    "@babel/eslint-parser": "7.21.3",
     "babel-jest": "29.5.0",
     "babel-plugin-transform-builtin-extend": "1.1.2",
     "babel-preset-env": "1.7.0",
