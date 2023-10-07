@@ -13,7 +13,7 @@
     "@babel/plugin-syntax-bigint": "7.8.3",
     "@babel/preset-env": "7.22.20",
     "@types/jest": "29.5.4",
-    "@types/node": "18.18.3",
+    "@types/node": "18.18.4",
     "@babel/eslint-parser": "7.22.15",
     "babel-jest": "29.6.4",
     "eslint": "8.51.0",
