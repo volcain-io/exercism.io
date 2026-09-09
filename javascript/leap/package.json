@@ -78,6 +78,6 @@
   ],
   "dependencies": {
     "braces": "3.0.3",
-    "mem": "10.0.0"
+    "memoize": "10.0.0"
   }
 }
